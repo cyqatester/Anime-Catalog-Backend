@@ -8,6 +8,8 @@ This project intentionally does **not** include Spring Security or an authentica
 ## 1. Database
 Create a PostgreSQL database named `anime_catalog`. Default connection is `localhost:5432`, user `postgres`, password `postgres`. Override with `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` environment variables. Hibernate creates/updates tables on startup.
 
+<img width="398" height="749" alt="image" src="https://github.com/user-attachments/assets/97236b9d-0178-4ff7-b12e-c97896ac985c" />
+
 ## 2. Run
 ```bash
 mvn clean test
