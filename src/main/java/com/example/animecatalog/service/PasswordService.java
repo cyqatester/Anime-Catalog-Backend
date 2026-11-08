@@ -1,0 +1,15 @@
+package com.example.animecatalog.service;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PasswordService {
+    public String hash(String raw) {
+        return BCrypt.hashpw(raw, BCrypt.gensalt());
+    }
+
+    public boolean matches(String raw, String hash) {
+        return BCrypt.checkpw(raw, hash);
+    }
+}
