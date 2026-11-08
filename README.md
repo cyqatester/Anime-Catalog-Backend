@@ -1,4 +1,4 @@
-# Anime Catalog Backend (without Spring Security)
+# Anime Catalog Backend
 
 Java 17 · Maven · Spring Boot 3.4.5 · PostgreSQL · Spring Data JPA · JUnit 5 · Swagger UI · GitHub Actions
 
@@ -13,7 +13,9 @@ Create a PostgreSQL database named `anime_catalog`. Default connection is `local
 mvn clean test
 mvn spring-boot:run
 ```
-Swagger: http://localhost:8080/swagger-ui.html
+Swagger: http://localhost:8080/swagger-ui/index.html
+
+<img width="824" height="736" alt="image" src="https://github.com/user-attachments/assets/cc6eab7f-0079-4f72-ab04-044b153815ff" />
 
 A default protected account is created if missing: username `superadmin`, password `ChangeMe123!`. Change this password before using the application. It cannot be deleted through the user-delete endpoint.
 
