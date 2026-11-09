@@ -17,7 +17,7 @@ mvn spring-boot:run
 ```
 Swagger: http://localhost:8080/swagger-ui/index.html
 
-<img width="824" height="736" alt="image" src="https://github.com/user-attachments/assets/cc6eab7f-0079-4f72-ab04-044b153815ff" />
+<img width="702" height="592" alt="image" src="https://github.com/user-attachments/assets/dc043397-c4be-49a5-bc59-48eaba819030" />
 
 A default protected account is created if missing: username `superadmin`, password `ChangeMe123!`. Change this password before using the application. It cannot be deleted through the user-delete endpoint.
 
