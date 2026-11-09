@@ -1,4 +1,4 @@
-# Anime Catalog Backend (without Spring Security)
+# Anime Catalog Backend
 
 Java 17 · Maven · Spring Boot 3.4.5 · PostgreSQL · Spring Data JPA · JUnit 5 · Swagger UI · GitHub Actions
 
@@ -8,12 +8,16 @@ This project intentionally does **not** include Spring Security or an authentica
 ## 1. Database
 Create a PostgreSQL database named `anime_catalog`. Default connection is `localhost:5432`, user `postgres`, password `postgres`. Override with `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` environment variables. Hibernate creates/updates tables on startup.
 
+<img width="398" height="749" alt="image" src="https://github.com/user-attachments/assets/97236b9d-0178-4ff7-b12e-c97896ac985c" />
+
 ## 2. Run
 ```bash
 mvn clean test
 mvn spring-boot:run
 ```
-Swagger: http://localhost:8080/swagger-ui.html
+Swagger: http://localhost:8080/swagger-ui/index.html
+
+<img width="824" height="736" alt="image" src="https://github.com/user-attachments/assets/cc6eab7f-0079-4f72-ab04-044b153815ff" />
 
 A default protected account is created if missing: username `superadmin`, password `ChangeMe123!`. Change this password before using the application. It cannot be deleted through the user-delete endpoint.
 
