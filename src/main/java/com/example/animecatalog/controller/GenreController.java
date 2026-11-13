@@ -5,9 +5,13 @@ import com.example.animecatalog.repository.GenreRepository;
 import com.example.animecatalog.service.ActorService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-
+/**
+ * Author: cyqatester
+ */
 @RestController
 @RequestMapping("/api/genres")
 public class GenreController {
@@ -23,22 +27,27 @@ public class GenreController {
     }
 
     @GetMapping
-    public List<Genre> list(@RequestHeader("X-Username") String username,
+    public List<Genre> list(
+            Authentication authentication,
             @RequestParam(required = false) String search) {
-        actors.actor(username);
+        actors.actor(authentication.getName());
         return search == null ? repo.findAll() : repo.findByNameContainingIgnoreCase(search);
     }
 
     @PostMapping
-    public Genre create(@RequestHeader("X-Username") String username, @RequestBody @Valid GenreInput in) {
-        actors.admin(username);
+    public Genre create(
+        Authentication authentication,
+        @RequestBody @Valid GenreInput in) {
+        actors.admin(authentication.getName());
         return repo.save(new Genre(in.name()));
     }
 
     @PutMapping("/{id}")
-    public Genre update(@RequestHeader("X-Username") String username, @PathVariable Long id,
+    public Genre update(
+            Authentication authentication,
+            @PathVariable Long id,
             @RequestBody @Valid GenreInput in) {
-        actors.admin(username);
+        actors.admin(authentication.getName());
         Genre g = repo.findById(id).orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
                 org.springframework.http.HttpStatus.NOT_FOUND));
         g.setName(in.name());
@@ -46,8 +55,10 @@ public class GenreController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@RequestHeader("X-Username") String username, @PathVariable Long id) {
-        actors.admin(username);
+    public void delete(
+        Authentication authentication,
+        @PathVariable Long id) {
+        actors.admin(authentication.getName());
         repo.deleteById(id);
     }
 }

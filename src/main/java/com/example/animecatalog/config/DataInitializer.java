@@ -6,7 +6,9 @@ import com.example.animecatalog.service.PasswordService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+/**
+ * Author: cyqatester
+ */
 @Configuration
 public class DataInitializer {
     @Bean

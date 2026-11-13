@@ -2,7 +2,9 @@ package com.example.animecatalog.service;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Author: cyqatester
+ */
 class PasswordServiceTest {
     private final PasswordService service = new PasswordService();
 

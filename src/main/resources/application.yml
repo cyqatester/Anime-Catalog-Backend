@@ -26,3 +26,9 @@ management:
     web:
       exposure:
         include: mappings
+
+app:
+  jwt:
+    # Override with a unique random secret of at least 32 characters in production.
+    secret: ${JWT_SECRET:local-development-secret-change-this-32chars}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}

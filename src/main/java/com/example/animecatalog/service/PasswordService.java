@@ -2,7 +2,9 @@ package com.example.animecatalog.service;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-
+/**
+ * Author: cyqatester
+ */
 @Service
 public class PasswordService {
     public String hash(String raw) {

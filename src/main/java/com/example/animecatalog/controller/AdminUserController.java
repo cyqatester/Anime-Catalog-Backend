@@ -5,9 +5,13 @@ import com.example.animecatalog.repository.UserRepository;
 import com.example.animecatalog.service.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-
+/**
+ * Author: cyqatester
+ */
 @RestController
 @RequestMapping("/api/admin/users")
 public class AdminUserController {
@@ -29,25 +33,30 @@ public class AdminUserController {
     }
 
     @GetMapping
-    public List<UserView> list(@RequestHeader("X-Username") String username,
+    public List<UserView> list(
+            Authentication authentication,
             @RequestParam(required = false) String search) {
-        actors.admin(username);
+        actors.admin(authentication.getName());
         return (search == null ? users.findAll()
                 : users.findByNameContainingIgnoreCaseOrUsernameContainingIgnoreCase(search, search)).stream()
                 .map(this::view).toList();
     }
 
     @PostMapping
-    public UserView create(@RequestHeader("X-Username") String username, @RequestBody @Valid UserInput in) {
-        actors.admin(username);
+    public UserView create(
+        Authentication authentication,
+        @RequestBody @Valid UserInput in) {
+        actors.admin(authentication.getName());
         return view(
                 users.save(new UserAccount(in.name(), in.username(), passwords.hash(in.password()), in.role(), false)));
     }
 
     @PutMapping("/{id}")
-    public UserView update(@RequestHeader("X-Username") String username, @PathVariable Long id,
+    public UserView update(
+            Authentication authentication, 
+            @PathVariable Long id,
             @RequestBody @Valid UserInput in) {
-        actors.admin(username);
+        actors.admin(authentication.getName());
         UserAccount u = users.findById(id).orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
                 org.springframework.http.HttpStatus.NOT_FOUND));
         u.setName(in.name());
@@ -58,8 +67,10 @@ public class AdminUserController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@RequestHeader("X-Username") String username, @PathVariable Long id) {
-        UserAccount actor = actors.admin(username);
+    public void delete(
+                       Authentication authentication,  
+                       @PathVariable Long id) {
+        UserAccount actor = actors.admin(authentication.getName());
         UserAccount target = users.findById(id)
                 .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
                         org.springframework.http.HttpStatus.NOT_FOUND));

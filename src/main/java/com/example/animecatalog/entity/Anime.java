@@ -3,7 +3,9 @@ package com.example.animecatalog.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.*;
-
+/**
+ * Author: cyqatester
+ */
 @Entity
 @Table(name = "anime")
 public class Anime {

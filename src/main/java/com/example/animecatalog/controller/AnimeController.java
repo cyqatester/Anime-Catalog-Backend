@@ -4,9 +4,13 @@ import com.example.animecatalog.entity.*;
 import com.example.animecatalog.repository.*;
 import com.example.animecatalog.service.ActorService;
 import jakarta.validation.Valid;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-
+/**
+ * Author: cyqatester
+ */
 @RestController
 @RequestMapping("/api/anime")
 public class AnimeController {
@@ -26,13 +30,13 @@ public class AnimeController {
 
     @GetMapping
     public List<Anime> search(
-            @RequestHeader("X-Username") String username,
+            Authentication authentication,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false) Integer yearAired,
             @RequestParam(required = false) ReleaseCategory releaseCategory) {
 
-        actors.actor(username);
+        actors.actor(authentication.getName());
 
         String normalizedTitle =
                 title == null ? "" : title.trim().toLowerCase(Locale.ROOT);
@@ -49,17 +53,21 @@ public class AnimeController {
     }
 
     @PostMapping
-    public Anime create(@RequestHeader("X-Username") String username, @RequestBody @Valid AnimeInput in) {
-        actors.admin(username);
+    public Anime create(
+        Authentication authentication, 
+        @RequestBody @Valid AnimeInput in) {
+        actors.admin(authentication.getName());
         Anime a = new Anime();
         apply(in, a);
         return anime.save(a);
     }
 
     @PutMapping("/{id}")
-    public Anime update(@RequestHeader("X-Username") String username, @PathVariable Long id,
+    public Anime update(
+            Authentication authentication, 
+            @PathVariable Long id,
             @RequestBody @Valid AnimeInput in) {
-        actors.admin(username);
+        actors.admin(authentication.getName());
         if (!anime.existsById(id))
             throw new org.springframework.web.server.ResponseStatusException(
                     org.springframework.http.HttpStatus.NOT_FOUND);
@@ -71,8 +79,10 @@ public class AnimeController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@RequestHeader("X-Username") String username, @PathVariable Long id) {
-        actors.admin(username);
+    public void delete(
+            Authentication authentication,  
+            @PathVariable Long id) {
+        actors.admin(authentication.getName());
         anime.deleteById(id);
     }
 
