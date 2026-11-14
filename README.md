@@ -1,5 +1,10 @@
 # Anime Catalog Backend
 
+<p>
+<picture>
+  <img width="1280" height="720" alt="Anime_Catalog_Backend_Run" src="https://github.com/user-attachments/assets/243f6db7-05b7-485e-a5c3-c3b67a40e365" />
+</picture>  
+</p>
 A REST API for managing an anime catalog, genres, and user accounts. The application is built with Java 17, Spring Boot, Spring Data JPA, PostgreSQL, and stateless JWT authentication.
 
 ## Tech stack
@@ -311,23 +316,3 @@ GitHub Actions runs the same `mvn --batch-mode clean verify` command on pushes a
 - CORS is configured separately in `CorsConfig`; adjust allowed origins to match the frontend deployment.
 - Actuator web exposure is configured for the `mappings` endpoint. Review management endpoint exposure before deployment.
 - Use least-privilege database credentials and back up the PostgreSQL database regularly.
-
-## Project structure
-
-```text
-src/
-├── main/
-│   ├── java/com/example/animecatalog/
-│   │   ├── config/       # Security, JWT filter, CORS, data initialization
-│   │   ├── controller/   # Authentication, anime, genre, user, profile APIs
-│   │   ├── entity/       # JPA entities and enums
-│   │   ├── repository/   # Spring Data repositories and anime search
-│   │   └── service/      # Actor, password, and token services
-│   └── resources/
-│       └── application.yml
-└── test/                 # Automated tests
-```
-
-## License
-
-No license file is currently included in this repository. Add a `LICENSE` file if you intend to publish reuse or distribution terms.
